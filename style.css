@@ -1,0 +1,673 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@700&display=swap');
+
+/*========CONFIGURAÇÕES GERAIS========*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+/*root -> Configurações visíveis por todo o documento html*/
+:root {
+  /*Variáveis: */
+  --header-height: 4.5rem;
+
+  /*HSK color mode: */
+  --hue: 36;
+  --base-color: hsl(var(--hue) 36% 57%);
+  --base-color-second: hsl(var(--hue) 65% 88%);
+  --base-color-alt: hsl(var(--hue) 57% 53%);
+  --title-color: hsl(var(--hue) 41% 10%);
+  --text-color: hsl(0 0% 46%);
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0 0% 98%);
+
+  /*hsl --> (hue, saturation, lightness)*/
+  /*hsl --> (tom, saturação, luminosidade)*/
+
+  /*FONTS:*/
+  --title-font-size: 1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: 'Poppins', sans-serif;
+  --body-font: 'DM Sans', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth; /*Proporciona um "deslize" suave na página */
+}
+
+body {
+  font: 400 1rem var(--body-font);
+  color: var(--text-color);
+  background: var(--body-color);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+button {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  border: none;
+  height: 3.5rem;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  font: 500 1rem var(--body-font);
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: var(--base-color-alt);
+}
+
+.title {
+  font: 700 var(--title-font-size) var(--title-font);
+  color: var(--title-color);
+  -webkit-font-smoothing: auto;
+}
+
+.container {
+  margin: 0 1.5rem;
+}
+
+.logo {
+  font: 700 1.31rem 'Poppins', sans-serif;
+  color: var(--title-color);
+}
+
+.logo span {
+  color: var(--base-color);
+}
+
+.logo-alt span {
+  color: var(--body-color);
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+/*========= HEADER ==========*/
+#cabecalho {
+  border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 2rem;
+  display: flex;
+
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--body-color);
+}
+
+#cabecalho.scroll {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+}
+
+nav.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height); /*72px/16 = 4.5rem --> Responsividade*/
+  width: 100%;
+}
+
+nav ul li {
+  text-align: center;
+}
+
+nav ul li a {
+  transition: color 0.2s; /*transição na apenas na cor dos elementos do menu*/
+  position: relative;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--base-color);
+}
+
+nav ul li a::after {
+  /*Criando um elemento 'falso'*/
+  /*Após o item:*/
+  content: '';
+  width: 0%; /*elemento 'falso' 'oculto'*/
+  height: 2px;
+  background: var(--base-color);
+
+  /*Assume posição absoluta a posição relativa de seu pai, no caso, a tag <a>:*/
+  position: absolute;
+  left: 0;
+  bottom: -1.5rem;
+  transition: width 0.2s;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%; /*Elemento 'falso aparece'*/
+}
+
+nav .menu {
+  opacity: 0;
+  visibility: hidden; /*Esconder estrutura*/
+  /*Transição Menu prt01*/
+  transition: 0.2s;
+  top: -20rem;
+}
+
+nav .menu ul {
+  display: none; /*Transição Menu prt02*/
+}
+
+/*---------- MOSTRAR MENU ----------*/
+nav.show .menu {
+  /*Prucura na classe show, a classe menu*/
+  opacity: 1;
+  visibility: visible;
+
+  background: var(--body-color);
+  height: 100vh; /*100% do viewport->height | viewport == Toda a tela do dispositivo*/
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /*Alinha o menu no centro do viewport*/
+  display: grid;
+  place-content: center;
+}
+
+nav.show .menu ul {
+  display: grid; /*Transição Menu prt03*/
+}
+
+nav.show ul.grid {
+  gap: 4rem;
+}
+
+/*Toggle menu:*/
+.toggle {
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+nav .icon-close {
+  /*"X" escondido*/
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  right: 1.5rem;
+  /*Transição:*/
+  top: -1.5rem;
+  transition: 0.2s;
+}
+
+nav.show div.icon-close {
+  /*"X" apareceu*/
+  visibility: visible;
+  opacity: 1;
+
+  top: 1.5rem;
+}
+
+/*========== MAIN ==========*/
+.section {
+  padding: calc(5rem + var(--header-height)) 0;
+}
+
+.section .title {
+  margin-bottom: 1rem;
+}
+
+.section .subtitle {
+  font-size: var(--subtitle-font-size);
+}
+
+.section header {
+  margin-bottom: 4rem;
+}
+
+.section header strong {
+  color: var(--base-color);
+}
+
+.divider-1 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 36%, 57%, 1),
+    hsla(var(--hue), 65%, 88%, 0.34)
+  );
+}
+.divider-2 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 65%, 88%, 0.34),
+    hsla(var(--hue), 36%, 57%, 1)
+  );
+}
+/*----------- INICIO ----------*/
+
+#inicio {
+  overflow: hidden;
+}
+
+#inicio .container {
+  margin: 0;
+}
+
+#inicio .inicio-img {
+  position: relative;
+}
+
+#inicio .inicio-img::before {
+  content: ''; /*Criando um elemento 'falso'*/
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute; /*O elemento sai do escopo de seu container e fica com um posicionamento absoluto em relação a toda a página, a menos que o container dele seja relativo, que é o nosso caso*/
+  top: -16.8%;
+  left: 16.7%;
+  z-index: 0; /*eixo de profundidade --> funcionalidade nova gerada pelo position*/
+}
+
+#inicio .inicio-img img {
+  position: relative; /*Habilita novas funcionalidade ao elemento*/
+  right: 2.93rem; /*Cria uma "margem" de 2.93rem à direita*/
+}
+
+#inicio .inicio-img img,
+#inicio .inicio-img::before {
+  border-radius: 0.25rem;
+} /*Configuração para os dois escopos*/
+
+#inicio .inicio-texto {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+#inicio .inicio-texto h1 {
+  margin-bottom: 1rem;
+}
+
+#inicio .inicio-texto p {
+  margin-bottom: 2rem;
+}
+
+/*----------- SOBRE ----------*/
+#sobre {
+  background: white;
+}
+#sobre .container {
+  margin: 0;
+}
+
+#sobre .image {
+  position: relative;
+}
+
+#sobre .image::before {
+  content: ''; /*Criando um elemento 'falso'*/
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute; /*O elemento sai do escopo de seu container e fica com um posicionamento absoluto em relação a toda a página, a menos que o container dele seja relativo, que é o nosso caso*/
+  top: -8.3%;
+  left: -33%;
+  z-index: 0; /*eixo de profundidade --> funcionalidade nova gerada pelo position*/
+}
+
+#sobre .image img {
+  position: relative; /*Habilita novas funcionalidade ao elemento*/
+}
+
+#sobre .image img,
+#sobre .image::before {
+  border-radius: 0.25rem;
+} /*Configuração para os dois escopos*/
+
+#sobre .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+/*----------- SERVIÇOS ----------*/
+.cards.grid {
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 3.625rem 2rem;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  border-bottom: 0.25rem solid var(--base-color);
+  border-radius: 0.25rem 0.25rem 0 0; /*0.25rem nas duas bordas superiores e 0 nas duas inferiores (sem borda)*/
+  text-align: center;
+}
+
+.card i {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 5rem;
+  color: var(--base-color);
+}
+
+.card .title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/*----------- DEPOIMENTOS ----------*/
+#depoimentos {
+  background: white;
+}
+
+#depoimentos .container {
+  margin-left: 0;
+  margin-right: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#depoimentos header {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 0;
+}
+
+#depoimentos blockquote {
+  padding: 2rem;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 0.25rem;
+}
+
+#depoimentos blockquote p {
+  position: relative;
+  text-indent: 1.875rem;
+  margin-bottom: 1.5rem;
+  color: var(--title-color);
+}
+
+#depoimentos blockquote p span {
+  font: 700 2.5rem serif; /*peso tamanho família*/
+
+  position: absolute; /*Cria uma nova camada, que por default, sobrepõe a página (absoluto em toda página)*/
+  /*Nesse caso, ele é relativo em relação a tag <p>*/
+  top: -0.375rem;
+  left: -1.875rem;
+  color: var(--base-color);
+}
+#depoimentos cite {
+  display: flex;
+  align-items: center;
+  font-style: normal;
+}
+
+#depoimentos cite img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover; /*Pega o objeto que está dentro desta tag de forma a cobrir todo cover em diferentes contextos dimensionais*/
+  clip-path: circle(); /*Cria uma "máscara" em forma de círculo*/
+  margin-right: 0.5rem;
+}
+
+/*SWIPER:*/
+.swiper-slide {
+  height: auto;
+  padding: 4rem 1rem;
+}
+
+.swiper-pagination-bullet {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--base-color);
+}
+
+/*----------- CONTATO ----------*/
+#contato .grid {
+  gap: 4rem;
+}
+
+#contato .text p {
+  margin-bottom: 2rem;
+}
+
+#contato button {
+  display: flex;
+  align-items: center;
+}
+
+#contato button i,
+#contato ul li i {
+  font-size: 1.5rem;
+  margin-right: 0.65rem;
+}
+
+#contato ul.grid {
+  gap: 2rem;
+}
+
+#contato ul li {
+  display: flex;
+  align-items: center;
+}
+
+#contato ul li i {
+  color: var(--base-color);
+}
+
+/*========FOOTER========*/
+footer {
+  background: var(--base-color);
+}
+
+footer.section {
+  padding: 4rem 0;
+}
+
+footer a.logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+footer .brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+footer i {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+}
+
+footer .social {
+  grid-auto-flow: column;
+  width: fit-content; /*"Encaixe pelo conteúdo"*/
+}
+
+footer .social a {
+  transition: 0.3s;
+  display: inline-block;
+}
+
+footer .social a:hover {
+  transform: translateY(-5px);
+}
+
+/*Back to TOP*/
+.back-to-top {
+  background: var(--base-color);
+  color: var(--text-color-light);
+
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+
+  padding: 0.5rem;
+  clip-path: circle();
+
+  font-size: 1.5rem;
+  line-height: 0;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: 0.3s;
+  transform: translateY(100%);
+}
+
+.back-to-top.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*+++++++++RESPONSIVO+++++++++*/
+
+/*========== MEDIA QUERIES ==========*/
+/*Media queries é responsável por selecionar pontos de qubra a medida que a página é redimesionada*/
+
+/* extra large devices: 1200 > */
+@media (min-width: 1200px) {
+  button {
+    height: 3.125rem;
+  }
+  .container {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section {
+    padding: 10rem 0;
+  }
+  .section header,
+  #depoimentos header {
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*Navegação:*/
+  nav .menu {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+
+  nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-font);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav .menu ul li a.title.active {
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
+  }
+
+  nav .icon-menu {
+    display: none;
+  }
+
+  /*Inicio:*/
+  #inicio .container {
+    grid-auto-flow: column;
+    justify-content: space-between;
+
+    margin: 0 auto;
+  }
+
+  #inicio .inicio-img {
+    order: 1; /*Funciona apenas se o elemmento estiver em uma caixa Grid*/
+  }
+
+  #inicio .inicio-texto {
+    order: 0; /*Vai aparecer primeiro que a imagem, por ser uma ordem anterior*/
+    max-width: 24rem;
+    text-align: left;
+    margin-left: 0;
+  }
+
+  /*Sobre:*/
+  #sobre .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+
+  /*Serviços:*/
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr; /*Divida o espaço em 3 frações por iguais (posso colocar em frações diferentes)*/
+  }
+
+  .card {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  #depoimentos .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*Contato:*/
+  #contato .container {
+    grid-auto-flow: column;
+    align-items: center;
+  }
+
+  #contato .text {
+    max-width: 25rem;
+  }
+
+  /*Footer:*/
+  footer.section {
+    padding: 3.75rem 0;
+  }
+
+  footer .container {
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer .logo {
+    font-size: 2.25rem;
+  }
+
+  main {
+    margin-top: calc(var(--header-height));
+  }
+}
+
+/* large devices: 1023 > */
+/* large devices: 992 (tablets) > */
+@media (min-width: 992px) {
+  :root {
+    --title-font-size: 2.25rem;
+    --subtitle-font-size: 1.125rem;
+  }
+}
+/*medium devices: 767 >*/

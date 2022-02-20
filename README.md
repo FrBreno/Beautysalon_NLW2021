@@ -2,8 +2,10 @@
 
 &nbsp;
 
-![Desktop](https://user-images.githubusercontent.com/91495296/154851257-897cf84c-109b-44b7-8253-34b6bba2a98d.jpg)
-<img height="350em" src="https://user-images.githubusercontent.com/91495296/154851272-946b132c-f52e-4708-b7f2-c3c5790b4a95.png" />
+<div>
+<img height="330em" src="https://user-images.githubusercontent.com/91495296/154851257-897cf84c-109b-44b7-8253-34b6bba2a98d.jpg">
+<img height="320em" src="https://user-images.githubusercontent.com/91495296/154851272-946b132c-f52e-4708-b7f2-c3c5790b4a95.png" />
+</div>
 
 &nbsp;
 

@@ -3,7 +3,7 @@
 &nbsp;
 
 ![Desktop](https://user-images.githubusercontent.com/91495296/154851257-897cf84c-109b-44b7-8253-34b6bba2a98d.jpg)
-<img height="400em" src="https://user-images.githubusercontent.com/91495296/154851272-946b132c-f52e-4708-b7f2-c3c5790b4a95.png" />
+<img height="350em" src="https://user-images.githubusercontent.com/91495296/154851272-946b132c-f52e-4708-b7f2-c3c5790b4a95.png" />
 
 &nbsp;
 
@@ -13,7 +13,7 @@ language: Brazilian Portuguese.
 
 Projeto realizado durante o evento NLW da [Rocketseat](https://www.rocketseat.com.br) na edição de 2021.  
 
-Todo o [material]() e as [tecnologias]() utilizadas estão disponíveis neste documento.  
+Todo o [material](https://github.com/FrBreno/Beautysalon_NLW2021#03-materiais-e-ferramentas-utilizadas) e as [tecnologias](https://github.com/FrBreno/Beautysalon_NLW2021#02-tecnologias) utilizadas estão disponíveis neste documento.  
 
 Acesse o projeto por [esse link](https://frbreno.github.io/Beautysalon_NLW2021/).
 
